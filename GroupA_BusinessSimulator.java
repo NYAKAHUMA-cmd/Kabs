@@ -1,4 +1,4 @@
-public class Kabs {
+public class GroupA_BusinessSimulator {
     public static void main(String[] args) {
         System.out.println("==== KABS SUPERMARKET ====");
         // Display the supermarket heading.
