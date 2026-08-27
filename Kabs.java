@@ -1,6 +1,7 @@
 public class Kabs {
     public static void main(String[] args) {
         System.out.println("==== KABS SUPERMARKET ====");
+        // Display the supermarket heading.
 
         String[] items = {"Sugar", "Salt", "Porridge", "Bread"};
 
@@ -10,6 +11,7 @@ public class Kabs {
 
         for (int i = 0; i < items.length; i++) {
             System.out.println((i + 1) + ". " + items[i] + " UGX " + prices[i]);
+            // Print the available products and their prices.
         }
 
         double total = 0;
@@ -18,6 +20,7 @@ public class Kabs {
 
         // Loop through each item and use the method to work out its discounted subtotal
         for (int i = 0; i < items.length; i++) {
+            // Calculate each item's subtotal and apply any eligible discount.
             afterDiscount[i] = calculateSubtotal(i, prices[i], quantities[i]);
 
             // Work out the message separately, just for display on the receipt
@@ -64,6 +67,7 @@ public class Kabs {
         for (int i = 0; i < items.length; i++) {
             System.out.println(items[i] + " x" + quantities[i] + " = UGX "
                     + afterDiscount[i] + " (" + discountMsg[i] + ")");
+                                        // Print the final receipt and the total amount to pay.
         }
         System.out.println("TOTAL = UGX " + total);
     }
