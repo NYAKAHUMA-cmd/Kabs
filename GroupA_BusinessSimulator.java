@@ -1,6 +1,6 @@
 public class GroupA_BusinessSimulator {
     public static void main(String[] args) {
-        System.out.println("==== KABS SUPERMARKET ====");
+        System.out.println("==== KABS SUPERMARKET ====\n");
         // Display the supermarket heading.
 
         String[] items = {"Sugar", "Salt", "Porridge", "Bread"};
@@ -16,21 +16,35 @@ public class GroupA_BusinessSimulator {
 
         double total = 0;
         double[] afterDiscount = new double[4];
-        String[] discountMsg = new String[4];
+        String[] discountMsg = {"", "", "", ""};
 
         // Loop through each item and use the method to work out its discounted subtotal
         for (int i = 0; i < items.length; i++) {
-            // Calculate each item's subtotal and apply any eligible discount.
+            // Calculate each item's subtotal and apply eligible discount.
             afterDiscount[i] = calculateSubtotal(i, prices[i], quantities[i]);
 
-            // Work out the message separately, just for display on the receipt
-            double sub = prices[i] * quantities[i];
-            if (afterDiscount[i] < sub) {
-                if (i == 0) discountMsg[i] = "5% discount";
-                else if (i == 2) discountMsg[i] = "UGX 5000 off";
-                else if (i == 3) discountMsg[i] = "10% discount";
-            } else {
-                discountMsg[i] = "no discount";
+            // Work out the discount message separately, just for display on the receipt.
+            if (i == 0) { // Sugar
+                if (quantities[i] >= 5) {
+                    discountMsg[i] = "(5% discount applied)";
+                } else {
+                    discountMsg[i] = "(no discount — fewer than 5)";
+                }
+
+            } else if (i == 1) { // Salt
+                // Salt has no discount message.
+
+            } else if (i == 2) { // Porridge
+                if (quantities[i] >= 3) {
+                    discountMsg[i] = "(UGX 5000 discount applied)";
+                } else {
+                    discountMsg[i] = "(no discount — fewer than 3)";
+                }
+
+            } else if (i == 3) { // Bread
+                if (quantities[i] >= 2) {
+                    discountMsg[i] = "(10% discount applied)";
+                }
             }
 
             total = total + afterDiscount[i];
@@ -51,9 +65,9 @@ public class GroupA_BusinessSimulator {
             finalPrice = sub - (sub * 0.05);
         } else if (index == 1) {                      // Salt
             // No discount, ever
-        } else if (index == 2 && quantity >= 3) {      // Porridge
+        } else if (index == 2 && quantity >= 3) {    // Porridge
             finalPrice = sub - 5000;
-        } else if (index == 3 && quantity >= 2) {      // Bread
+        } else if (index == 3 && quantity >= 2) {    // Bread
             finalPrice = sub - (sub * 0.10);
         }
 
@@ -62,13 +76,17 @@ public class GroupA_BusinessSimulator {
 
     // Method 2: prints the itemised receipt using the values calculated in main
     public static void printReceipt(String[] items, int[] quantities, double[] afterDiscount,
-                                      String[] discountMsg, double total) {
-        System.out.println("==== RECEIPT====");
+                                    String[] discountMsg, double total) {
+        System.out.println(" \n==== RECEIPT====\n");
+
         for (int i = 0; i < items.length; i++) {
-            System.out.println(items[i] + " x" + quantities[i] + " = UGX "
-                    + afterDiscount[i] + " (" + discountMsg[i] + ")");
-                                        // Print the final receipt and the total amount to pay.
+            System.out.println(items[i] + " x " + quantities[i] + " = UGX "
+                    + afterDiscount[i] + "     " + discountMsg[i]);
+            // Print the final receipt and the total amount to pay.
         }
+
+        System.out.println("\n------------------------------------------");
         System.out.println("TOTAL = UGX " + total);
+        System.out.println("");
     }
 }
